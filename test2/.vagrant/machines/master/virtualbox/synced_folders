@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"F:/NJIT/IT610/centralised_logging_server/test2","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
