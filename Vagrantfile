@@ -5,6 +5,7 @@ Vagrant.configure("2") do |config|
       master.vm.network "private_network", ip: "192.168.33.10"
       master.vm.provision "shell", path: "setup_master.sh"
       master.vm.provision "shell", path: "rsyslog.sh"
+      master.timezone.value = "America/New_York"
   end
 
   config.vm.define "client1" do |client1|
@@ -12,6 +13,7 @@ Vagrant.configure("2") do |config|
       client1.vm.network "private_network", ip: "192.168.33.20"
       client1.vm.provision "shell", path: "setup_client.sh", args: "client1"
       client1.vm.provision "shell", path: "rsyslog.sh"
+      client1.timezone.value = "America/New_York"
   end
 
   config.vm.define "client2" do |client2|
@@ -19,5 +21,6 @@ Vagrant.configure("2") do |config|
       client2.vm.network "private_network", ip: "192.168.33.30"
       client2.vm.provision "shell", path: "setup_client.sh", args: "client2"
       client2.vm.provision "shell", path: "rsyslog.sh"
+      client2.timezone.value = "America/New_York"
   end
 end

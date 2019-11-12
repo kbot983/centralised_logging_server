@@ -124,6 +124,10 @@ sudo systemctl status rsyslog
 
 1. [Vagrant](https://www.vagrantup.com/downloads.html)
 2. [Oracle VM virtual box or any virtual box provider](https://www.oracle.com/virtualization/technologies/vm/downloads/virtualbox-downloads.html)
+3. Vagrant timezone plugin
+```
+vagrant plugin install vagrant-timezone #Logs will have proper time
+```
 
 ### Deploying 
 
