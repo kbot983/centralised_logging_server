@@ -67,7 +67,7 @@ $ModLoad imtcp
 $InputTCPServerRun 514
 
 ```
-* Now we will tell rsyslog where to store file. So we create a template to show how incoming log files should be saved. We save them in ```/var/log`` folder according to the hostname and programname that is generating logs.  
+* Now we will tell rsyslog where to store file. So we create a template to show how incoming log files should be saved. We save them in ```/var/log``` folder according to the hostname and program name that is generating logs.  
 ```
 $template RemoteLogs,"/var/log/%HOSTNAME%/%PROGRAMNAME%.log"
 *.* ?RemoteLogs
@@ -77,30 +77,48 @@ $template RemoteLogs,"/var/log/%HOSTNAME%/%PROGRAMNAME%.log"
 
 * After it is configure exit out of vim and restart rsyslog using systemctl command 
 
-``` sudo systemctl restart rsyslog ```
-
-Hence after this rsyslog will be open and listening for incoming log files from clients
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+``` 
+sudo systemctl restart rsyslog 
 
 ```
-Give an example
-```
 
-### And coding style tests
-
-Explain what these tests test and why
+* Hence after this rsyslog will be open and listening for incoming log files from clients. You can check status of rsyslog using systemctl command
 
 ```
-Give an example
+sudo systemctl status rsyslog
+```
+
+
+#### Client side
+
+* Setting up client is again starting rsyslog and enabling it like we did on server side and configuring rsyslog from ``` /etc/rsyslog.conf ```
+
+``` 
+sudo systemctl start rsyslog
+sudo systemctl enable rsyslog
+sudo vi /etc/rsyslog.conf
+
+```
+* Add this to your conf file and save it. 
+
+```
+  *.* @@ADD-SERVER-IP-ADDR-HERE:514  #example *.* @@192.168.33.10:514
+```
+
+``` *.* ``` says that all type of logs should go to this IP addr. 
+``` @@ ``` defines we are using TCP protocol to send. You can use ``` @ ``` for UDP protocol.
+
+* Save it and restart rsyslog 
+
+```
+sudo systemctl restart rsyslog
+```
+
+* Client is now configured to send all types of logs onto server. You can again check status of rsyslog by using systemctl command
+
+```
+sudo systemctl status rsyslog
+
 ```
 
 ## 🎈 Usage <a name="usage"></a>
@@ -109,7 +127,21 @@ Add notes about how to use the system.
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
-Add additional notes about how to deploy this on a live system.
+### Prequistes for deployment
+
+1. [Vagrant](https://www.vagrantup.com/downloads.html)
+2. [Oracle VM virtual box or any virtual box provider](https://www.oracle.com/virtualization/technologies/vm/downloads/virtualbox-downloads.html)
+
+### Deploying 
+
+I have already created scripts and vagrant files that will automatically do everything. First download this git repository onto your machine and change active directory to ``` centralised_logging_server``` and just vagrant up will set everything. 
+
+```
+git clone https://github.com/kbot983/centralised_logging_server.git
+cd centralised_logging_server
+vagrant up
+```
+
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
