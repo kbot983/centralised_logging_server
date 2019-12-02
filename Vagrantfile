@@ -6,7 +6,17 @@ Vagrant.configure("2") do |config|
       master.vm.provision "shell", path: "setup_master.sh"
       master.vm.provision "shell", path: "rsyslog.sh"
       master.timezone.value = "America/New_York"
+      master.vm.network "forwarded_port", guest: 80, host: 8080
   end
+
+  config.vm.define "supermaster" do |supermaster|
+    supermaster.vm.box = "centos/7"
+    supermaster.vm.network "private_network", ip: "192.168.33.11"
+    supermaster.vm.provision "shell", path: "setup_supermaster.sh"
+    # master.vm.provision "shell", path: "rsyslog.sh"
+    supermaster.timezone.value = "America/New_York"
+    supermaster.vm.network "forwarded_port", guest: 80, host: 8081
+end
 
   config.vm.define "client1" do |client1|
       client1.vm.box = "centos/7"
