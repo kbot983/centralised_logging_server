@@ -1,21 +1,22 @@
 
 Vagrant.configure("2") do |config|
-  config.vm.define "master" do |master|
-      master.vm.box = "centos/7"
-      master.vm.network "private_network", ip: "192.168.33.10"
-      master.vm.provision "shell", path: "setup_master.sh"
-      master.vm.provision "shell", path: "rsyslog.sh"
-      master.timezone.value = "America/New_York"
-      master.vm.network "forwarded_port", guest: 80, host: 8080
-  end
 
   config.vm.define "supermaster" do |supermaster|
     supermaster.vm.box = "centos/7"
-    supermaster.vm.network "private_network", ip: "192.168.33.11"
+    supermaster.vm.network "private_network", ip: "192.168.33.1"
     supermaster.vm.provision "shell", path: "setup_supermaster.sh"
     # master.vm.provision "shell", path: "rsyslog.sh"
     supermaster.timezone.value = "America/New_York"
     supermaster.vm.network "forwarded_port", guest: 80, host: 8081
+end
+
+config.vm.define "mastergui" do |mastergui|
+  mastergui.vm.box = "centos/7"
+  mastergui.vm.network "private_network", ip: "192.168.33.11"
+  mastergui.vm.provision "shell", path: "setup_supermaster.sh"
+  # master.vm.provision "shell", path: "rsyslog.sh"
+  mastergui.timezone.value = "America/New_York"
+  mastergui.vm.network "forwarded_port", guest: 80, host: 8082
 end
 
   config.vm.define "client1" do |client1|
