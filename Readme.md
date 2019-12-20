@@ -13,12 +13,15 @@
     <br> 
 </p>
 
+
+
 ## 📝 Table of Contents
 
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Deployment](#deployment)
 - [Built Using](#built_using)
+- [Whats new](#whats_new)
 
 ## 🧐 About <a name = "about"></a>
 
@@ -144,3 +147,15 @@ vagrant up
 
 - [Vagrant](https://www.vagrantup.com/)
 - [Rsyslog](https://www.rsyslog.com/) 
+- [LogAnalyzer](https://loganalyzer.adiscon.com/)
+
+## 🎇 Whats new <a name = "whats_new"></a>
+
+I have added a front end interface for Logs with [LogAnalyzer](https://loganalyzer.adiscon.com/). I chose this frontend because it directly works on the top of rsyslog. Rsyslog has the abilty to output in form of MySQL databases. LogAnalyzer is built with PHP and MySQL that displays those tables in the form of logs and gives little statistics about different part about. I followed [this](http://yallalabs.com/linux/how-to-setup-loganalyzer-with-rsyslog-on-centos-7-rhel-7/) guide. Again this time I have script setup to do everything. To check database 
+> Login: kbot
+> Pasword: 1234
+
+To check my project all you have to do is 
+``` vagrant up ```
+
+---
