@@ -1,3 +1,4 @@
+echo "Setting up loganalyzer"
 sudo su
 cd /tmp
 wget http://download.adiscon.com/loganalyzer/loganalyzer-4.1.5.tar.gz
